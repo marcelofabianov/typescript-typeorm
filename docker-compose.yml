@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+    db:
+        container_name: db
+        image: postgres:13
+        environment:
+            PGPASSWORD: '${DB_PASSWORD:-password}'
+            POSTGRES_DB: '${DB_DATABASE:-db}'
+            POSTGRES_USER: '${DB_USERNAME:-user}'
+            POSTGRES_PASSWORD: '${DB_PASSWORD:-password}'
+        volumes:
+            - 'db:/var/lib/postgresql/data'
+        ports:
+            - "5432:5432"
+
+volumes:
+    db:
+        driver: local
