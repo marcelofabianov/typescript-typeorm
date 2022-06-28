@@ -1,10 +1,11 @@
 import "reflect-metadata";
-import express from "express";
+import app from './app';
+import { AppDataSource as db } from './db';
 
-const app = express();
+async function main () {
+    await db.initialize();
+    console.log('Database connected!')
+    app.listen(3000, () => console.log('Server run http://localhost:3000'));
+}
 
-app.get('/', function (req, res) {
-    res.send('Hello World!');
-});
-
-app.listen(3000, () => console.log('Server On!'));
+main();
